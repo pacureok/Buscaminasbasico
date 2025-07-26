@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscaminas Básico</title>
+    <style>
+        /* Estilos CSS para el juego Buscaminas */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5; /* Fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #2c3e50; /* Azul oscuro */
+            margin-bottom: 20px;
+        }
+
+        #game-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        #minesweeper-grid {
+            display: grid;
+            /* Las columnas se definirán en JavaScript para que sean dinámicas */
+            border: 2px solid #95a5a6; /* Borde del tablero */
+            margin: 20px auto;
+            background-color: #bdc3c7; /* Fondo de las celdas no abiertas */
+        }
+
+        .cell {
+            width: 30px; /* Ancho de cada celda */
+            height: 30px; /* Alto de cada celda */
+            background-color: #ecf0f1; /* Color de celda sin abrir */
+            border: 2px outset #bdc3c7; /* Efecto 3D para celdas sin abrir */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none; /* Evitar selección de texto al hacer clic */
+            transition: background-color 0.1s ease;
+        }
+
+        .cell:hover:not(.opened):not(.flagged) {
+            background-color: #dfe4e6; /* Ligero cambio de color al pasar el ratón */
+        }
+
+        .cell.opened {
+            background-color: #e0e0e0; /* Color de celda abierta */
+            border: 1px inset #bdc3c7; /* Efecto 3D para celdas abiertas */
+            cursor: default;
+        }
+
+        .cell.mine {
+            background-color: #e74c3c; /* Rojo para la mina explotada */
+            border: 1px inset #bdc3c7;
+            color: white;
+        }
+
+        .cell.flagged {
+            background-color: #3498db; /* Azul para la bandera */
+            color: white;
+            border: 2px outset #bdc3c7;
+        }
+
+        /* Colores para los números de minas adyacentes */
+        .cell.number-1 { color: #2980b9; } /* Azul */
+        .cell.number-2 { color: #27ae60; } /* Verde */
+        .cell.number-3 { color: #c0392b; } /* Rojo */
+        .cell.number-4 { color: #8e44ad; } /* Púrpura */
+        .cell.number-5 { color: #d35400; } /* Naranja oscuro */
+        .cell.number-6 { color: #16a085; } /* Turquesa */
+        .cell.number-7 { color: #34495e; } /* Gris oscuro */
+        .cell.number-8 { color: #7f8c8d; } /* Gris */
+
+        #message {
+            margin-top: 20px;
+            font-size: 1.4em;
+            font-weight: bold;
+            min-height: 25px; /* Para mantener el espacio y evitar saltos de diseño */
+        }
+
+        #restart-button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #2ecc71; /* Verde esmeralda */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
+        }
+
+        #restart-button:hover {
+            background-color: #27ae60; /* Verde más oscuro al pasar el ratón */
+            transform: translateY(-2px); /* Pequeño efecto de elevación */
+        }
+
+        #restart-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(46, 204, 113, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Buscaminas</h1>
+        <div id="minesweeper-grid"></div>
+        <div id="message"></div>
+        <button id="restart-button">Reiniciar Juego</button>
+    </div>
+
+    <!-- Enlazar el archivo JavaScript del juego -->
+    <script src="minesweeper.js"></script>
+</body>
+</html>
